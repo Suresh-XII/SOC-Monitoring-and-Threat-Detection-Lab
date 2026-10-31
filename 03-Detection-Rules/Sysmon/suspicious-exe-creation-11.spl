@@ -1,0 +1,5 @@
+index=blue EventCode=11
+| eval File_Path=coalesce(TargetFilename,Target_File_Name)
+| where match(File_Path,"(?i)\\(temp|appdata|downloads|public|desktop|programdata)\\") AND match(File_Path,"(?i)\.exe$")
+| table _time host User Image File_Path
+| sort - _time

@@ -1,0 +1,5 @@
+index=blue EventCode=1
+| eval Process_Path=coalesce(Image,image)
+| where match(Process_Path,"(?i)\\(temp|appdata|downloads|public|desktop|programdata)\\") AND match(Process_Path,"(?i)\.exe$")
+| table _time host User Process_Path ParentImage CommandLine ProcessId ParentProcessId
+| sort - _time

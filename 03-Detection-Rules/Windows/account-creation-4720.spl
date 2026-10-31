@@ -1,0 +1,5 @@
+index=blue EventCode=4720
+| eval Created_Account=coalesce(TargetUserName,Target_Account_Name)
+| eval Actor=coalesce(SubjectUserName,Subject_Account_Name,user)
+| table _time host Actor Created_Account SubjectDomainName Message
+| sort - _time

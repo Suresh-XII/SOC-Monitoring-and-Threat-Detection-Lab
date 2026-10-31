@@ -1,0 +1,10 @@
+index=blue EventCode=4625
+| eval Source_IP=coalesce(IpAddress,Source_Network_Address)
+| eval Target_User=coalesce(TargetUserName,Account_Name,user)
+| where isnotnull(Source_IP) AND Source_IP!="-"
+| stats count AS Failed_Attempts values(Target_User) AS Targeted_Accounts earliest(_time) AS First_Seen latest(_time) AS Last_Seen by Source_IP host
+| where Failed_Attempts>=5
+| eval Severity=case(Failed_Attempts>=20,"High",Failed_Attempts>=10,"Medium",true(),"Low")
+| convert ctime(First_Seen) ctime(Last_Seen)
+| table First_Seen Last_Seen Source_IP host Targeted_Accounts Failed_Attempts Severity
+| sort - Failed_Attempts

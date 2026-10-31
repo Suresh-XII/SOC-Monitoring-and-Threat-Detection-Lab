@@ -1,0 +1,16 @@
+index=blue EventCode=4104
+| eval Script=coalesce(ScriptBlockText,Message)
+| where match(Script,"(?i)FromBase64String|EncodedCommand|DownloadString|IEX|Invoke-Expression|ExecutionPolicy Bypass|WindowStyle Hidden")
+| eval Detection_Indicator=case(
+    match(Script,"(?i)FromBase64String"),"Base64 Decoding",
+    match(Script,"(?i)EncodedCommand"),"Encoded PowerShell Command",
+    match(Script,"(?i)DownloadString"),"Remote Content Download",
+    match(Script,"(?i)IEX|Invoke-Expression"),"Dynamic Code Execution",
+    match(Script,"(?i)ExecutionPolicy Bypass"),"Execution Policy Bypass",
+    match(Script,"(?i)WindowStyle Hidden"),"Hidden Window Execution",
+    true(),"Suspicious PowerShell Activity")
+| eval Executing_User=coalesce(user,User,SubjectUserName,"Unknown")
+| eval Script_Length=len(Script)
+| eval Severity="Requires triage"
+| table _time host Executing_User EventCode Detection_Indicator Severity Script_Length Script
+| sort - _time

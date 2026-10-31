@@ -1,0 +1,12 @@
+index=blue EventCode=3
+| eval Source_IP=coalesce(SourceIp,SourceAddress)
+| eval Destination_IP=coalesce(DestinationIp,DestinationAddress)
+| eval Destination_Port=coalesce(DestinationPort,dest_port)
+| eval Process_Name=coalesce(Image,ProcessName,"Unknown")
+| stats dc(Destination_Port) AS Unique_Ports count AS Total_Connections values(Destination_Port) AS Scanned_Ports values(Process_Name) AS Processes earliest(_time) AS First_Seen latest(_time) AS Last_Seen by Source_IP Destination_IP
+| where Unique_Ports>=10
+| eval Severity=if(Unique_Ports>=30,"High","Medium")
+| eval Detection_Status="Requires Investigation"
+| convert ctime(First_Seen) ctime(Last_Seen)
+| table First_Seen Last_Seen Source_IP Destination_IP Unique_Ports Total_Connections Scanned_Ports Processes Severity Detection_Status
+| sort - Unique_Ports

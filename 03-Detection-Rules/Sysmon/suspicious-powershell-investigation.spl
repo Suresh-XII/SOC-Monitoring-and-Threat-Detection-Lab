@@ -1,0 +1,4 @@
+index=blue EventCode=1
+| search Image="*powershell.exe" OR Image="*pwsh.exe"
+| table _time host User ParentImage Image CommandLine ProcessGuid ParentProcessGuid
+| sort - _time

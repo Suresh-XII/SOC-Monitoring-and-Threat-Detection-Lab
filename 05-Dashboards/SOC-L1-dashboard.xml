@@ -1,0 +1,32 @@
+<dashboard version="1.1" theme="dark">
+  <label>SOC L1 Triage Dashboard</label>
+  <description>Portfolio overview for Windows and Sysmon telemetry. Panels show search results for triage and do not by themselves confirm malicious activity.</description>
+  <fieldset submitButton="false">
+    <input type="time" token="time" searchWhenChanged="true">
+      <label>Time Range</label>
+      <default><earliest>-24h@h</earliest><latest>now</latest></default>
+    </input>
+  </fieldset>
+  <row>
+    <panel><title>Total Events</title><single><search><query><![CDATA[index=blue | stats count AS value]]></query><earliest>$time.earliest$</earliest><latest>$time.latest$</latest></search><option name="drilldown">none</option><option name="underLabel">Indexed events in selected range</option></single></panel>
+    <panel><title>Failed Logons</title><single><search><query><![CDATA[index=blue EventCode=4625 | stats count AS value]]></query><earliest>$time.earliest$</earliest><latest>$time.latest$</latest></search><option name="drilldown">none</option><option name="underLabel">Windows Event ID 4625</option></single></panel>
+    <panel><title>Account Lockouts</title><single><search><query><![CDATA[index=blue EventCode=4740 | stats count AS value]]></query><earliest>$time.earliest$</earliest><latest>$time.latest$</latest></search><option name="drilldown">none</option><option name="underLabel">Windows Event ID 4740</option></single></panel>
+    <panel><title>Suspicious PowerShell Indicators</title><single><search><query><![CDATA[index=blue EventCode=4104 | eval Script=coalesce(ScriptBlockText,Message) | where match(Script,"(?i)FromBase64String|EncodedCommand|DownloadString|IEX|Invoke-Expression|ExecutionPolicy Bypass|WindowStyle Hidden") | stats count AS value]]></query><earliest>$time.earliest$</earliest><latest>$time.latest$</latest></search><option name="drilldown">none</option><option name="underLabel">Keyword matches requiring review</option></single></panel>
+    <panel><title>Potential Port Scanning Pairs</title><single><search><query><![CDATA[index=blue EventCode=3 | eval Source_IP=coalesce(SourceIp,SourceAddress) | eval Destination_IP=coalesce(DestinationIp,DestinationAddress) | eval Destination_Port=coalesce(DestinationPort,dest_port) | stats dc(Destination_Port) AS Unique_Ports by Source_IP Destination_IP | where Unique_Ports>=10 | stats count AS value]]></query><earliest>$time.earliest$</earliest><latest>$time.latest$</latest></search><option name="drilldown">none</option><option name="underLabel">Sysmon connection pairs; verify direction</option></single></panel>
+  </row>
+  <row>
+    <panel><title>Recent SOC Triage Events</title><description>Selected event types for analyst review; rows are not verdicts.</description><table><search><query><![CDATA[index=blue (EventCode=4625 OR EventCode=4720 OR EventCode=4740 OR EventCode=4104 OR EventCode=1 OR EventCode=3 OR EventCode=11)
+| eval Detection=case(EventCode=4625,"Failed Logon",EventCode=4720,"New Account",EventCode=4740,"Account Lockout",EventCode=4104,"PowerShell Script Block",EventCode=1,"Process Creation",EventCode=3,"Network Connection",EventCode=11,"File Creation",true(),"Other")
+| eval Account=coalesce(TargetUserName,SubjectUserName,User,user,"Not available")
+| table _time Detection host Account EventCode
+| sort 0 - _time
+| head 100]]></query><earliest>$time.earliest$</earliest><latest>$time.latest$</latest><refresh>30s</refresh><refreshType>delay</refreshType></search><option name="count">15</option><option name="drilldown">none</option><option name="rowNumbers">true</option><option name="wrap">true</option></table></panel>
+  </row>
+  <row>
+    <panel><title>Security Events by Use Case</title><chart><search><query><![CDATA[index=blue (EventCode=4625 OR EventCode=4720 OR EventCode=4740 OR EventCode=4104 OR EventCode=1 OR EventCode=3 OR EventCode=11)
+| eval Category=case(EventCode=4625,"Authentication",EventCode=4720 OR EventCode=4740,"Account Changes",EventCode=4104,"PowerShell",EventCode=1 OR EventCode=11,"Process and File",EventCode=3,"Network",true(),"Other")
+| stats count AS Events by Category
+| sort 0 - Events]]></query><earliest>$time.earliest$</earliest><latest>$time.latest$</latest></search><option name="charting.chart">bar</option><option name="charting.legend.placement">none</option><option name="drilldown">none</option></chart></panel>
+    <panel><title>Security Event Timeline</title><chart><search><query><![CDATA[index=blue (EventCode=4625 OR EventCode=4720 OR EventCode=4740 OR EventCode=4104 OR EventCode=1 OR EventCode=3 OR EventCode=11) | timechart span=15m count AS Events]]></query><earliest>$time.earliest$</earliest><latest>$time.latest$</latest></search><option name="charting.chart">line</option><option name="drilldown">none</option></chart></panel>
+  </row>
+</dashboard>

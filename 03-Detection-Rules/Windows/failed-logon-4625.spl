@@ -1,0 +1,3 @@
+index=blue EventCode=4625
+| table _time host ComputerName TargetUserName IpAddress WorkstationName LogonType Status SubStatus Message
+| sort - _time

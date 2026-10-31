@@ -1,0 +1,7 @@
+index=blue EventCode=4740
+| eval Locked_Account=coalesce(TargetUserName,user)
+| eval Caller=coalesce(CallerComputerName,"Unknown")
+| stats count AS Lockout_Count earliest(_time) AS First_Lockout latest(_time) AS Last_Lockout by host Locked_Account Caller
+| convert ctime(First_Lockout) ctime(Last_Lockout)
+| table Last_Lockout host Locked_Account Caller Lockout_Count
+| sort - Lockout_Count
