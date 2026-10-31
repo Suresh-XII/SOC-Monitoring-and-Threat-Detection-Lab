@@ -2,7 +2,7 @@
 
 A hands-on SOC monitoring portfolio project using Splunk, Windows security telemetry, Sysmon, and controlled Kali Linux simulations. It documents detection logic, analyst investigation steps, and evidence for a small home lab.
 
-> **Status:** Starter repository based on the lab details shared so far. Queries and dashboard searches are examples that must be validated against your actual sourcetypes, field extractions, and events. The available screenshot showed one Windows Event ID 4625 on host `Suresh` on 30 October 2026; that single failure does not establish brute force. Screenshots and other evidence have not been supplied in this package.
+> **Status:** Evidence-backed lab portfolio in progress. Queries and dashboard searches must be validated against the actual sourcetypes, field extractions, and events. Supplied screenshots document an SSH brute-force simulation, a dashboard/search count discrepancy, and separate Windows/Sysmon telemetry. The report keeps those evidence streams separate and records unresolved questions.
 
 ## Project goals
 
@@ -31,6 +31,7 @@ The shared chat describes Splunk Enterprise on Windows, a Universal Forwarder on
 ## Detection use cases
 
 - Windows failed logon (4625) and threshold-based brute-force triage
+- Linux SSH failed-password monitoring and brute-force simulation triage
 - Account creation (4720), lockout (4740), and selected privilege/group changes
 - PowerShell Script Block Logging (4104)
 - Sysmon process creation (1), network connection (3), and file creation (11)
@@ -47,7 +48,9 @@ The shared chat describes Splunk Enterprise on Windows, a Universal Forwarder on
 
 ## Evidence and accuracy
 
-The initial failed-logon screenshot identified EventCode 4625, Windows Security, host `Suresh`, and a failed authentication. It did not show a username, source IP, or process. Those values are intentionally not guessed. The incident report is marked preliminary pending corroborating events.
+The initial failed-logon screenshot identified EventCode 4625, Windows Security, host `Suresh`, and a failed authentication. It did not show a username, source IP, or process. Those values are intentionally not guessed.
+
+The SSH evidence shows 671 failed events in a dashboard and 271 in a separate search view. The search uses `index=main`; ingestion summaries separately show Linux telemetry in `index=blue`. The incident report records these as unresolved differences and escalates them for validation rather than combining the counts.
 
 ## Safety and privacy
 
