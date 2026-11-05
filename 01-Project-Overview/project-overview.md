@@ -1,10 +1,6 @@
 ## Executive Summary
-=======
-**Release status:** Deployment-ready lab package (v1.0)
-**Validation:** Run `python3 scripts/validate_project.py` before publishing changes.
 
-## Purpose
-The **SOC Monitoring and Threat Detection Lab** is an enterprise-grade security monitoring environment built using **Splunk Enterprise**, **Windows 11 Pro**, **Sysmon**, and **Kali Linux**. The primary objective of this project is to simulate real-world cyber attack techniques, capture comprehensive endpoint and network telemetry, develop robust Splunk Search Processing Language (SPL) detection rules, and execute structured incident investigations following industry standard SOC Level 1/Level 2 workflows.
+The SOC Monitoring and Threat Detection Lab** is an enterprise-grade security monitoring environment built using **Splunk Enterprise**, **Windows 11 Pro**, **Sysmon**, and **Kali Linux**. The primary objective of this project is to simulate real-world cyber attack techniques, capture comprehensive endpoint and network telemetry, develop robust Splunk Search Processing Language (SPL) detection rules, and execute structured incident investigations following industry standard SOC Level 1/Level 2 workflows.
 
 ---
 
