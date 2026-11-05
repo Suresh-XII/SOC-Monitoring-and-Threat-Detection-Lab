@@ -1,14 +1,9 @@
-# Project Overview
-
-<<<<<<< HEAD
 ## Executive Summary
 =======
 **Release status:** Deployment-ready lab package (v1.0)
 **Validation:** Run `python3 scripts/validate_project.py` before publishing changes.
 
 ## Purpose
->>>>>>> 488e040c7b911fe60abbd5b4e3ba290621f279fc
-
 The **SOC Monitoring and Threat Detection Lab** is an enterprise-grade security monitoring environment built using **Splunk Enterprise**, **Windows 11 Pro**, **Sysmon**, and **Kali Linux**. The primary objective of this project is to simulate real-world cyber attack techniques, capture comprehensive endpoint and network telemetry, develop robust Splunk Search Processing Language (SPL) detection rules, and execute structured incident investigations following industry standard SOC Level 1/Level 2 workflows.
 
 ---
@@ -20,8 +15,6 @@ The **SOC Monitoring and Threat Detection Lab** is an enterprise-grade security 
 - **Threat Simulation:** Executed controlled attack vectors from Kali Linux, including Hydra SSH and Windows RDP brute-force attacks, Nmap multi-port reconnaissance, Base64-encoded PowerShell payloads, and unauthorized local administrator provisioning.
 - **Incident Investigation & Reporting:** Authored comprehensive investigation reports incorporating timeline reconstruction, raw event forensics, MITRE ATT&CK mapping, and mitigation recommendations.
 - **SOC Operations Dashboard:** Engineered an interactive, real-time Splunk Classic XML dashboard providing single-pane-of-glass visibility for triage analysts.
-
-<<<<<<< HEAD
 ---
 =======
 - Splunk Enterprise: Windows (reported; version and host details to add)
@@ -30,11 +23,8 @@ The **SOC Monitoring and Threat Detection Lab** is an enterprise-grade security 
 - Kali Linux: attack simulation against Windows (reported)
 - Collected logs: Windows Security, System, Sysmon (reported)
 - Dashboard: custom multi-panel dashboard; scheduled alerts reported
->>>>>>> 488e040c7b911fe60abbd5b4e3ba290621f279fc
 
 ## Lab Environment Specifications
-
-<<<<<<< HEAD
 | Component | Product / Version | Sanitized Hostname | Role |
 | :--- | :--- | :--- | :--- |
 | **SIEM Platform** | Splunk Enterprise 9.3.x | `SPLUNK-SRV-01` | Central Log Ingestion, Indexing, SPL Correlation, Dashboards |
@@ -56,13 +46,5 @@ The **SOC Monitoring and Threat Detection Lab** is an enterprise-grade security 
 3. Triage detections with context and corroborating telemetry.
 4. Preserve sanitized evidence and document limitations.
 
-## Definition of done
 
-- [x] Detection rules are grouped by telemetry source and use the shared `blue` index.
-- [x] A Classic Simple XML dashboard is included and documented.
-- [x] Evidence and investigation templates are separated from operational configuration.
-- [x] Deployment and validation steps are documented without committing secrets or real host details.
-- [x] Repository validation runs automatically in GitHub Actions.
-- [ ] Lab owner records the environment-specific values in `02-Environment-Setup/environment-details.md`.
-- [ ] Lab owner executes the controlled scenarios and records pass/fail evidence.
->>>>>>> 488e040c7b911fe60abbd5b4e3ba290621f279fc
+
