@@ -4,7 +4,6 @@
 
 ### Centralized Security Telemetry, Detection Engineering, and Incident Triage with Splunk Enterprise, Windows 11, Sysmon, and Kali Linux
 
-<<<<<<< HEAD
 [![Splunk Enterprise](https://img.shields.io/badge/Splunk_Enterprise-9.3.x-000000?style=for-the-badge&logo=splunk&logoColor=white)](https://www.splunk.com/)
 [![Windows 11](https://img.shields.io/badge/Windows_11-Pro_23H2-0078D4?style=for-the-badge&logo=windows-11&logoColor=white)](https://www.microsoft.com/windows)
 [![Sysmon](https://img.shields.io/badge/Sysmon-v15.x-00ADEF?style=for-the-badge&logo=windows&logoColor=white)](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
@@ -12,14 +11,12 @@
 [![MITRE ATT&CK](https://img.shields.io/badge/MITRE_ATT%26CK-v14_Mapped-red?style=for-the-badge)](https://attack.mitre.org/)
 [![Project Status](https://img.shields.io/badge/Project_Status-Complete_✅-brightgreen?style=for-the-badge)](#project-status)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
-=======
 **Project Status:** Deployment-ready lab package | Detection validation required per environment
 
 The repository is intentionally safe to publish: it contains sanitized
 documentation, portable SPL, a Classic Simple XML dashboard, evidence
 references, and deployment acceptance criteria. Environment-specific values
 remain placeholders until the lab owner validates them.
->>>>>>> 488e040c7b911fe60abbd5b4e3ba290621f279fc
 
 </div>
 
@@ -210,7 +207,6 @@ Sysmon64.exe -accepteula -i sysmonconfig.xml
 ### 3. Import the Dashboard
 Navigate to **Splunk Web > Dashboards > Create New Dashboard > Source (XML)**, paste the contents of [`05-Dashboards/SOC-L1-dashboard.xml`](05-Dashboards/SOC-L1-dashboard.xml), and click **Save**.
 
-<<<<<<< HEAD
 ### 4. Run Detection Rules
 Open any `.spl` file in [`03-Detection-Rules/`](03-Detection-Rules/) and execute directly in Splunk Search.
 
@@ -229,7 +225,6 @@ Open any `.spl` file in [`03-Detection-Rules/`](03-Detection-Rules/) and execute
 ## 📜 License
 
 This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
-=======
 My goal is to build a practical SOC monitoring environment that demonstrates my ability to collect and analyze security logs, develop SIEM detection rules, investigate suspicious activities, and present security findings through reports and dashboards.
 
 ## Deployment handoff
@@ -244,4 +239,3 @@ python3 scripts/validate_project.py
 ```
 
 The GitHub Actions workflow runs the same check on every push and pull request.
->>>>>>> 488e040c7b911fe60abbd5b4e3ba290621f279fc

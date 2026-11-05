@@ -1,6 +1,6 @@
 ## Executive Summary
 
-The SOC Monitoring and Threat Detection Lab** is an enterprise-grade security monitoring environment built using **Splunk Enterprise**, **Windows 11 Pro**, **Sysmon**, and **Kali Linux**. The primary objective of this project is to simulate real-world cyber attack techniques, capture comprehensive endpoint and network telemetry, develop robust Splunk Search Processing Language (SPL) detection rules, and execute structured incident investigations following industry standard SOC Level 1/Level 2 workflows.
+The **SOC Monitoring and Threat Detection Lab** is an enterprise-grade security monitoring environment built using **Splunk Enterprise**, **Windows 11 Pro**, **Sysmon**, and **Kali Linux**. The primary objective of this project is to simulate real-world cyber attack techniques, capture comprehensive endpoint and network telemetry, develop robust Splunk Search Processing Language (SPL) detection rules, and execute structured incident investigations following industry standard SOC Level 1/Level 2 workflows.
 
 ---
 
@@ -12,7 +12,6 @@ The SOC Monitoring and Threat Detection Lab** is an enterprise-grade security mo
 - **Incident Investigation & Reporting:** Authored comprehensive investigation reports incorporating timeline reconstruction, raw event forensics, MITRE ATT&CK mapping, and mitigation recommendations.
 - **SOC Operations Dashboard:** Engineered an interactive, real-time Splunk Classic XML dashboard providing single-pane-of-glass visibility for triage analysts.
 ---
-=======
 - Splunk Enterprise: Windows (reported; version and host details to add)
 - Splunk index: `blue` (reported)
 - Universal Forwarder: Windows (reported); Kali is an authorized test source unless separately configured
@@ -36,11 +35,9 @@ The SOC Monitoring and Threat Detection Lab** is an enterprise-grade security mo
 1. **Safety & Authorization:** All offensive actions were conducted inside an isolated private subnet (`192.168.10.0/24`) against authorized lab assets.
 2. **Sanitization:** All hostnames, domain names, user credentials, and internal network parameters within documentation and evidence registers have been sanitized to safeguard operational privacy.
 3. **Fidelity:** Detections are tuned to differentiate between routine administrative tasks and genuine indicators of compromise (IOCs), minimizing alert fatigue.
-=======
 1. Collect and search Windows and Sysmon events.
 2. Identify authentication anomalies and suspicious process/file activity.
 3. Triage detections with context and corroborating telemetry.
 4. Preserve sanitized evidence and document limitations.
-
 
 

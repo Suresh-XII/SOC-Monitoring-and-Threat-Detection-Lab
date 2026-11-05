@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Detection Rules Catalog
 
 This directory maintains the **Splunk Search Processing Language (SPL)** detection rules authored and validated in the SOC lab environment. Each rule addresses a specific attack technique mapped to the **MITRE ATT&CK Framework**.
@@ -36,7 +35,6 @@ This directory maintains the **Splunk Search Processing Language (SPL)** detecti
    - Set **Trigger Condition:** Number of results > 0.
    - Configure **Actions:** Add to Triggered Alerts, send webhook, or send email notification.
 3. **Integration into SOC Dashboards:** Use the queries as data inputs for single-value indicators, charts, or event tables.
-=======
 # Detection rules
 
 These SPL searches are investigation and triage content for the lab. They are
@@ -53,4 +51,3 @@ and response actions are validated in the target Splunk instance.
 
 The catalog in `08-Documentation/detection-catalog.md` is the authoritative
 inventory of use cases, event IDs, thresholds, and known limitations.
->>>>>>> 488e040c7b911fe60abbd5b4e3ba290621f279fc

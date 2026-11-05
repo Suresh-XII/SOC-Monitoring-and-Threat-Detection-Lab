@@ -1,14 +1,12 @@
 # Environment Setup & Configuration Details
 
-<<<<<<< HEAD
 ## 1. Splunk Enterprise (Central SIEM)
-=======
 Use this file as the environment acceptance record. Replace bracketed values with
 sanitized values before publishing. Never commit passwords, tokens, private keys,
 real public IP addresses, or unredacted internal hostnames.
 
 This file is a checklist, not a claim that every step is already configured. Record actual versions and sanitized configuration snippets.
->>>>>>> 488e040c7b911fe60abbd5b4e3ba290621f279fc
+
 
 - **Version / Build:** Splunk Enterprise 9.3.1 (Build e0b7931c8d)
 - **Host OS:** Windows 11 Pro 64-bit / Windows Server
@@ -44,7 +42,6 @@ This file is a checklist, not a claim that every step is already configured. Rec
 
 Configured via Local Security Policy (`secpol.msc`) and PowerShell:
 
-<<<<<<< HEAD
 | Audit Category / Subcategory | Setting | Monitored Event IDs |
 | :--- | :--- | :--- |
 | **Logon/Logoff:** Audit Logon | Success and Failure | 4624 (Logon), 4625 (Failed Logon) |
@@ -101,7 +98,7 @@ Configured via Local Security Policy (`secpol.msc`) and PowerShell:
 | Sysmon Operational | Event ID 3 (Network Connect) | **VERIFIED** | `SourceIp`, `DestinationIp`, `DestinationPort` |
 | Sysmon Operational | Event ID 11 (File Create) | **VERIFIED** | `TargetFilename`, `Image`, `User` |
 | Linux Auth | SSH Failed Password | **VERIFIED** | `user`, `src_ip`, `host` |
-=======
+
 For each source, record one known test event and confirm its raw event, timestamp, host, index, sourcetype, and extracted fields in Splunk.
 
 | Source | Test event/time (UTC) | Index | Sourcetype | Expected fields | Result |
@@ -116,4 +113,3 @@ For each source, record one known test event and confirm its raw event, timestam
 - [ ] All dashboard panels return either data or an explained zero-event result.
 - [ ] Each enabled detection has a saved-search owner, schedule, threshold, and response action.
 - [ ] Test evidence is sanitized and linked from the relevant investigation report.
->>>>>>> 488e040c7b911fe60abbd5b4e3ba290621f279fc
