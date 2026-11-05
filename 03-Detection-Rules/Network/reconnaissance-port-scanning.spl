@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Network Reconnaissance & Port Scanning (Sysmon Event ID 3)`
+`Event ID: 3 (Network Connection)`
+`MITRE ATT&CK: T1046 (Network Service Discovery)`
+`Severity: High (>= 30 unique ports) / Medium (>= 10 unique ports)`
+`Data Source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational | index=blue`
+`Description: Aggregates network connection events across destination ports per source-target IP pair to detect horizontal/vertical scanning.`
+```
+
 index=blue EventCode=3
 | eval Source_IP=coalesce(SourceIp,SourceAddress)
 | eval Destination_IP=coalesce(DestinationIp,DestinationAddress)

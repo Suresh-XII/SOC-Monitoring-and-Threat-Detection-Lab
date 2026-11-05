@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Windows Failed Logon Raw Review`
+`Event ID: 4625 (An account failed to log on)`
+`MITRE ATT&CK: T1110 (Brute Force)`
+`Severity: Low / Informational (Single occurrence)`
+`Data Source: WinEventLog:Security | index=blue`
+`Description: Returns raw failed authentication attempts with logon type, status codes, and user details.`
+```
+
 index=blue EventCode=4625
 | table _time host ComputerName TargetUserName IpAddress WorkstationName LogonType Status SubStatus Message
 | sort - _time

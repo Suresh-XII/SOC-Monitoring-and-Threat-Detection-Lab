@@ -5,6 +5,7 @@
 *.p12
 *.pfx
 secrets/
+*.log
 
 # OS/editor noise
 .DS_Store

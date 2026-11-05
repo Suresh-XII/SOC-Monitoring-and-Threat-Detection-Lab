@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Suspicious PowerShell Script Block Detection`
+`Event ID: 4104 (Execute a Remote Command / Script Block)`
+`MITRE ATT&CK: T1059.001 (PowerShell), T1027 (Obfuscated Files or Information), T1140 (Deobfuscate/Decode Files)`
+`Severity: High (Execution Policy Bypass, Base64, IEX/DownloadString)`
+`Data Source: WinEventLog:Microsoft-Windows-PowerShell/Operational | index=blue`
+`Description: Analyzes de-obfuscated script blocks for known malicious cmdlets, execution bypass flags, and download cradles.`
+```
+
 index=blue EventCode=4104
 | eval Script=coalesce(ScriptBlockText,Message)
 | where match(Script,"(?i)FromBase64String|EncodedCommand|DownloadString|IEX|Invoke-Expression|ExecutionPolicy Bypass|WindowStyle Hidden")

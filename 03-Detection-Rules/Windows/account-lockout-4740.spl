@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Windows User Account Lockout Monitoring`
+`Event ID: 4740 (A user account was locked out)`
+`MITRE ATT&CK: T1110.001 (Password Guessing - DoS byproduct)`
+`Severity: Medium`
+`Data Source: WinEventLog:Security | index=blue`
+`Description: Identifies locked-out accounts following threshold violations and tracks the calling machine generating the lockouts.`
+```
+
 index=blue EventCode=4740
 | eval Locked_Account=coalesce(TargetUserName,user)
 | eval Caller=coalesce(CallerComputerName,"Unknown")

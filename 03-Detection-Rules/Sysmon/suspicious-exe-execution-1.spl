@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Suspicious Executable Execution from User-Writable Paths`
+`Event ID: 1 (Process Create)`
+`MITRE ATT&CK: T1059 (Command and Scripting Interpreter), T1204.002 (User Execution: Malicious File)`
+`Severity: High`
+`Data Source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational | index=blue`
+`Description: Detects execution of executables originating from Temp, AppData, Downloads, Public, Desktop, or ProgramData folders.`
+```
+
 index=blue EventCode=1
 | eval Process_Path=coalesce(Image,image)
 | where match(Process_Path,"(?i)\\(temp|appdata|downloads|public|desktop|programdata)\\") AND match(Process_Path,"(?i)\.exe$")

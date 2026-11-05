@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Sysmon PowerShell Process Execution & Lineage Investigation`
+`Event ID: 1 (Process Create)`
+`MITRE ATT&CK: T1059.001 (PowerShell)`
+`Severity: Medium`
+`Data Source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational | index=blue`
+`Description: Investigates instances of powershell.exe or pwsh.exe execution, displaying parent processes, full command line, and process GUIDs.`
+```
+
 index=blue EventCode=1
 | search Image="*powershell.exe" OR Image="*pwsh.exe"
 | table _time host User ParentImage Image CommandLine ProcessGuid ParentProcessGuid

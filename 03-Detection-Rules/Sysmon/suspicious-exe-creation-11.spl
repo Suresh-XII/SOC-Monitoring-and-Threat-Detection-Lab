@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Suspicious Executable File Creation in User-Writable Paths`
+`Event ID: 11 (FileCreate)`
+`MITRE ATT&CK: T1105 (Ingress Tool Transfer), T1036 (Masquerading)`
+`Severity: High`
+`Data Source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational | index=blue`
+`Description: Flags creation of executable (.exe) files in user-writable or temporary directories (Temp, AppData, Downloads, Public, Desktop, ProgramData).`
+```
+
 index=blue EventCode=11
 | eval File_Path=coalesce(TargetFilename,Target_File_Name)
 | where match(File_Path,"(?i)\\(temp|appdata|downloads|public|desktop|programdata)\\") AND match(File_Path,"(?i)\.exe$")

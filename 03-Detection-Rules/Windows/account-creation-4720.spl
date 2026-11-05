@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Windows New User Account Creation`
+`Event ID: 4720 (A user account was created)`
+`MITRE ATT&CK: T1136.001 (Create Account: Local Account)`
+`Severity: Medium (Requires verification against change management tickets)`
+`Data Source: WinEventLog:Security | index=blue`
+`Description: Identifies when a new local or domain user account is provisioned, displaying the creator and created account.`
+```
+
 index=blue EventCode=4720
 | eval Created_Account=coalesce(TargetUserName,Target_Account_Name)
 | eval Actor=coalesce(SubjectUserName,Subject_Account_Name,user)

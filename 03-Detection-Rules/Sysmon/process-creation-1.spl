@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Sysmon Process Creation Raw Baseline`
+`Event ID: 1 (Process Create)`
+`MITRE ATT&CK: T1059 (Command and Scripting Interpreter)`
+`Severity: Informational / Contextual`
+`Data Source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational | index=blue`
+`Description: Baseline query returning newly spawned processes along with parent processes, GUIDs, and command-line parameters.`
+```
+
 index=blue EventCode=1
 | table _time host User Image ParentImage CommandLine ProcessId ParentProcessId ProcessGuid ParentProcessGuid
 | sort - _time

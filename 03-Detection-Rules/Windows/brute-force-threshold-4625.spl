@@ -1,3 +1,13 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Windows Authentication Brute-Force Threshold Detection`
+`Event ID: 4625 (Failed Logon)`
+`MITRE ATT&CK: T1110.001 (Password Guessing), T1110.003 (Password Spraying)`
+`Severity: High (>= 20 attempts) / Medium (>= 10 attempts) / Low (>= 5 attempts)`
+`Data Source: WinEventLog:Security | index=blue`
+`Description: Aggregates failed logon attempts by Source IP within the search window, flags sources with >= 5 failures, and reports targeted accounts.`
+```
+
 index=blue EventCode=4625
 | eval Source_IP=coalesce(IpAddress,Source_Network_Address)
 | eval Target_User=coalesce(TargetUserName,Account_Name,user)

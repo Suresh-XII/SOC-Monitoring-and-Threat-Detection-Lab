@@ -1,0 +1,27 @@
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Successful Logon Baseline & Post-Brute Force Correlation`
+`Event ID: 4624 (An account was successfully logged on)`
+`MITRE ATT&CK: T1078 (Valid Accounts), T1021.001 (Remote Desktop Protocol), T1021.002 (SMB/Windows Admin Shares)`
+`Severity: Informational / Correlational (High if preceded by 4625 threshold breach)`
+`Data Source: WinEventLog:Security | index=blue`
+`Description: Analyzes successful user authentications by logon type (Type 2=Interactive, Type 3=Network, Type 10=RDP) and source IP.`
+```
+
+index=blue EventCode=4624
+| eval Source_IP=coalesce(IpAddress,Source_Network_Address)
+| eval Target_User=coalesce(TargetUserName,Account_Name,user)
+| eval Logon_Mode=case(
+    LogonType=2,"Interactive (Console)",
+    LogonType=3,"Network (SMB/Share)",
+    LogonType=4,"Batch / Scheduled",
+    LogonType=5,"Service Startup",
+    LogonType=7,"Unlock Workstation",
+    LogonType=8,"NetworkCleartext",
+    LogonType=9,"NewCredentials",
+    LogonType=10,"RemoteInteractive (RDP)",
+    LogonType=11,"CachedInteractive",
+    true(),"Other (" . LogonType . ")")
+| where Target_User!="ANONYMOUS LOGON" AND NOT match(Target_User,"(?i)\$$")
+| table _time host Target_User Logon_Mode Source_IP WorkstationName AuthenticationPackageName
+| sort - _time

@@ -1,5 +1,14 @@
-index=main sourcetype=linux_auth "Failed password"
-| rex "Failed password for (?:(?:invalid user )?)(?<user>\\S+) from (?<src_ip>\\S+)"
+```spl
+`SOC Lab Detection Rule`
+`Rule Name: Linux SSH Authentication Brute-Force Detection`
+`Data Source: linux_auth | index=blue`
+`MITRE ATT&CK: T1110.001 (Password Guessing)`
+`Severity: High (>= 100 attempts) / Medium (>= 20 attempts) / Low (>= 5 attempts)`
+`Description: Parses SSH failure lines from auth.log via regex, aggregates failures by host and source IP, and triggers when failures >= 5.`
+```
+
+index=blue sourcetype=linux_auth "Failed password"
+| rex "Failed password for (?:(?:invalid user )?)(?<user>\S+) from (?<src_ip>\S+)"
 | stats count AS failed_attempts values(user) AS targeted_users earliest(_time) AS first_seen latest(_time) AS last_seen by host src_ip
 | where failed_attempts >= 5
 | eval severity=case(failed_attempts>=100,"HIGH",failed_attempts>=20,"MEDIUM",true(),"LOW")
